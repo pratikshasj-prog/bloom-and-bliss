@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fresh Flowers Collection | Bloom & Bliss</title>
+  <meta name="description" content="Explore handcrafted fresh floral bouquets, roses, lilies, orchids, and sunflowers at Bloom & Bliss. Farm-fresh same-day flower delivery." />
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <style>
+    /* Catalog Specific Layout */
+    .catalog-header-banner {
+      background: linear-gradient(135deg, #FDF0F2 0%, #F5ECF9 100%);
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .catalog-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+    .filter-sidebar {
+      background: var(--white);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 26px;
+      position: sticky;
+      top: 100px;
+    }
+    .filter-title {
+      font-size: 1.15rem;
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .filter-section {
+      margin-bottom: 24px;
+    }
+    .filter-group-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+    }
+    .filter-pills {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .pill-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      color: var(--text-main);
+      background: var(--cream-bg);
+      border: 1px solid transparent;
+      transition: all var(--transition-fast);
+      text-align: left;
+    }
+    .pill-btn:hover, .pill-btn.active {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary-border);
+      font-weight: 600;
+    }
+    .range-slider-wrap {
+      padding: 10px 0;
+    }
+    .range-slider {
+      width: 100%;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+    .range-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+    .catalog-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: var(--white);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 14px 20px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .search-filter-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--cream-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      padding: 6px 14px;
+      min-width: 240px;
+    }
+    .search-filter-box input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 0.88rem;
+      width: 100%;
+    }
+    .sort-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+    }
+    .sort-select {
+      border: 1px solid var(--border-subtle);
+      background: var(--cream-bg);
+      padding: 8px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.88rem;
+      outline: none;
+      cursor: pointer;
+    }
+    .empty-catalog {
+      text-align: center;
+      padding: 60px 20px;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px dashed var(--border-subtle);
+    }
+    @media (max-width: 992px) {
+      .catalog-layout {
+        grid-template-columns: 1fr;
+      }
+      .filter-sidebar {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar">
+    🌸 Fresh Flowers Delivered with Love • Free Greeting Card with Every Bouquet • Use Code <span class="badge-code">BLOOM10</span>
+  </div>
+
+  <!-- Sticky Navbar -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2a4 4 0 0 0-4 4c0 3 4 7 4 7s4-4 4-7a4 4 0 0 0-4-4z"/>
+            <path d="M12 13s-4 4-4 7a4 4 0 0 0 8 0c0-3-4-7-4-7z"/>
+          </svg>
+        </div>
+        <div>
+          <span class="brand-name">Bloom & Bliss</span>
+          <span class="brand-tagline-sub">Flowers & Gifts</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="flowers.html" class="nav-link active">Flowers</a>
+        <a href="gifts.html" class="nav-link">Gifts</a>
+        <a href="combos.html" class="nav-link">Combos</a>
+        <a href="occasions.html" class="nav-link">Occasions</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="nav-icon-btn" onclick="openSearchModal()" title="Search catalog">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <a href="wishlist.html" class="nav-icon-btn" title="View Wishlist">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span class="badge-counter wishlist-badge" style="display: none;">0</span>
+        </a>
+        <button class="nav-icon-btn" onclick="toggleCartDrawer()" title="View Shopping Cart">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="badge-counter cart-badge" style="display: none;">0</span>
+        </button>
+        <button class="mobile-toggle" id="mobile-toggle" onclick="toggleMobileMenu()">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-overlay" id="nav-overlay" onclick="closeMobileMenu()"></div>
+
+  <!-- Header Banner -->
+  <section class="catalog-header-banner">
+    <div class="container">
+      <span class="section-eyebrow">Handpicked & Farm Fresh</span>
+      <h1 class="section-title">Artisanal Flowers Collection</h1>
+      <p class="section-subtitle">From classic Dutch red roses to exotic oriental lilies, each stem is harvested with care and arranged with passion.</p>
+    </div>
+  </section>
+
+  <!-- Catalog Section with Sidebar Filters -->
+  <section class="section-spacer">
+    <div class="container catalog-layout">
+      <!-- Filter Sidebar -->
+      <aside class="filter-sidebar">
+        <div class="filter-title">
+          <span>Filters</span>
+          <button id="btn-clear-filters" class="btn btn-sm" style="color: var(--primary); font-size: 0.8rem; padding: 0;">Reset All</button>
+        </div>
+
+        <!-- Flower Categories -->
+        <div class="filter-section">
+          <h4 class="filter-group-title">Flower Type</h4>
+          <div class="filter-pills">
+            <button class="pill-btn active" data-subcat="all">
+              <span>All Flowers</span>
+              <span>14</span>
+            </button>
+            <button class="pill-btn" data-subcat="roses">
+              <span>Roses</span>
+              <span>4</span>
+            </button>
+            <button class="pill-btn" data-subcat="lilies">
+              <span>Lilies</span>
+              <span>2</span>
+            </button>
+            <button class="pill-btn" data-subcat="orchids">
+              <span>Orchids</span>
+              <span>1</span>
+            </button>
+            <button class="pill-btn" data-subcat="bouquets">
+              <span>Mixed Bouquets</span>
+              <span>3</span>
+            </button>
+            <button class="pill-btn" data-subcat="carnations">
+              <span>Carnations</span>
+              <span>1</span>
+            </button>
+            <button class="pill-btn" data-subcat="tulips">
+              <span>Tulips</span>
+              <span>1</span>
+            </button>
+            <button class="pill-btn" data-subcat="sunflowers">
+              <span>Sunflowers</span>
+              <span>2</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Price Range Slider -->
+        <div class="filter-section">
+          <h4 class="filter-group-title">Price Range</h4>
+          <div class="range-slider-wrap">
+            <input type="range" id="price-slider" class="range-slider" min="900" max="3000" step="100" value="3000" />
+            <div class="range-labels">
+              <span>₹900</span>
+              <span id="price-value" style="font-weight: 700; color: var(--primary);">₹3000</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Products Grid & Toolbar -->
+      <main class="catalog-content">
+        <div class="catalog-toolbar">
+          <div class="search-filter-box">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="catalog-search" placeholder="Search flowers (e.g. red roses, lilies)..." />
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <span id="product-count" style="font-size: 0.9rem; color: var(--text-muted); font-weight: 600;">14 Products</span>
+            
+            <div class="sort-box">
+              <label for="sort-by" style="color: var(--text-muted);">Sort by:</label>
+              <select id="sort-by" class="sort-select">
+                <option value="popularity">Popularity</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="rating">Top Rated</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid" id="product-grid">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="empty-catalog" style="display: none;">
+          <div style="font-size: 3rem; margin-bottom: 12px;">🌿</div>
+          <h3>No flowers match your filter criteria</h3>
+          <p style="color: var(--text-muted); margin: 8px 0 20px;">Try adjusting your price range or flower category filter.</p>
+          <button onclick="document.getElementById('btn-clear-filters').click()" class="btn btn-primary">Reset Filters</button>
+        </div>
+      </main>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo" style="margin-bottom: 12px; display: inline-flex;">
+            <div class="brand-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2a4 4 0 0 0-4 4c0 3 4 7 4 7s4-4 4-7a4 4 0 0 0-4-4z"/>
+              </svg>
+            </div>
+            <div>
+              <span class="brand-name">Bloom & Bliss</span>
+              <span class="brand-tagline-sub">Flowers, Gifts & Moments Made Special</span>
+            </div>
+          </a>
+          <p class="footer-desc">Premium florist crafting moments of joy with garden-fresh blossoms and artisanal gifts delivered with precision.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Collections</h4>
+          <ul class="footer-links">
+            <li><a href="flowers.html?cat=roses">Roses</a></li>
+            <li><a href="flowers.html?cat=lilies">Oriental Lilies</a></li>
+            <li><a href="flowers.html?cat=orchids">Orchids</a></li>
+            <li><a href="flowers.html?cat=bouquets">Mixed Bouquets</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Help & Info</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Customer Service</a></li>
+            <li><a href="cart.html">View Cart</a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Contact</h4>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>+91 98765 43210</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>orders@bloomandbliss.in</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Bloom & Bliss. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="btn-scroll-top" id="btn-scroll-top" onclick="scrollToTop()">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/filters.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      new ProductCatalogPage({
+        baseCategory: 'flowers',
+        containerId: 'product-grid',
+        countId: 'product-count',
+        emptyStateId: 'empty-state'
+      });
+    });
+  </script>
+</body>
+</html>

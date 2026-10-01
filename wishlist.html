@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Wishlist | Bloom & Bliss</title>
+  <meta name="description" content="View your saved flower bouquets, gifts, and celebration hampers at Bloom & Bliss. Move to cart anytime for instant delivery." />
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <style>
+    .wishlist-hero {
+      background: linear-gradient(135deg, #FDF0F2 0%, #F5ECF9 100%);
+      padding: 50px 0 35px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar">
+    💖 Your Personal Floral Wishlist • Save Your Favorites & Gift Anytime
+  </div>
+
+  <!-- Sticky Navbar -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2a4 4 0 0 0-4 4c0 3 4 7 4 7s4-4 4-7a4 4 0 0 0-4-4z"/>
+            <path d="M12 13s-4 4-4 7a4 4 0 0 0 8 0c0-3-4-7-4-7z"/>
+          </svg>
+        </div>
+        <div>
+          <span class="brand-name">Bloom & Bliss</span>
+          <span class="brand-tagline-sub">Flowers & Gifts</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="flowers.html" class="nav-link">Flowers</a>
+        <a href="gifts.html" class="nav-link">Gifts</a>
+        <a href="combos.html" class="nav-link">Combos</a>
+        <a href="occasions.html" class="nav-link">Occasions</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="nav-icon-btn" onclick="openSearchModal()" title="Search catalog">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <a href="wishlist.html" class="nav-icon-btn active" title="View Wishlist">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span class="badge-counter wishlist-badge" style="display: none;">0</span>
+        </a>
+        <button class="nav-icon-btn" onclick="toggleCartDrawer()" title="View Shopping Cart">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="badge-counter cart-badge" style="display: none;">0</span>
+        </button>
+        <button class="mobile-toggle" id="mobile-toggle" onclick="toggleMobileMenu()">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-overlay" id="nav-overlay" onclick="closeMobileMenu()"></div>
+
+  <!-- Wishlist Hero -->
+  <section class="wishlist-hero">
+    <div class="container">
+      <span class="section-eyebrow">Saved Treasures</span>
+      <h1 class="section-title">My Wishlist</h1>
+      <p class="section-subtitle">Keep track of the blooms and gifts you adore for upcoming birthdays and anniversaries.</p>
+    </div>
+  </section>
+
+  <!-- Wishlist Content -->
+  <section class="section-spacer">
+    <div class="container">
+      <div id="wishlist-header-actions" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; flex-wrap: wrap; gap: 14px;">
+        <span id="wishlist-count-text" style="font-weight: 700; color: var(--text-dark); font-size: 1.1rem;">0 Saved Items</span>
+        <button id="btn-add-all" class="btn btn-sm btn-primary" onclick="addAllWishlistToCart()">
+          Move All to Cart &rarr;
+        </button>
+      </div>
+
+      <div class="product-grid" id="wishlist-grid">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Empty State -->
+      <div id="wishlist-empty-state" class="empty-catalog" style="display: none;">
+        <div style="font-size: 4rem; margin-bottom: 16px;">💖</div>
+        <h2 style="font-size: 1.8rem; margin-bottom: 8px;">Your wishlist is currently empty</h2>
+        <p style="color: var(--text-muted); max-width: 480px; margin: 0 auto 24px;">
+          Tap the heart icon on any floral bouquet or gift hamper to save it here for later celebrations!
+        </p>
+        <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+          <a href="flowers.html" class="btn btn-primary">Browse Flowers</a>
+          <a href="gifts.html" class="btn btn-outline">Explore Gifts</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+        <p>&copy; 2026 Bloom & Bliss. All rights reserved.</p>
+        <div class="payment-badges">
+          <span class="payment-badge">UPI</span>
+          <span class="payment-badge">Visa</span>
+          <span class="payment-badge">MasterCard</span>
+          <span class="payment-badge">RuPay</span>
+          <span class="payment-badge">COD</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    function renderWishlist() {
+      const container = document.getElementById('wishlist-grid');
+      const emptyState = document.getElementById('wishlist-empty-state');
+      const countText = document.getElementById('wishlist-count-text');
+      const headerActions = document.getElementById('wishlist-header-actions');
+      
+      const ids = window.Wishlist ? window.Wishlist.getItems() : [];
+
+      if (ids.length === 0) {
+        if (container) container.innerHTML = '';
+        if (emptyState) emptyState.style.display = 'block';
+        if (headerActions) headerActions.style.display = 'none';
+        return;
+      }
+
+      if (emptyState) emptyState.style.display = 'none';
+      if (headerActions) headerActions.style.display = 'flex';
+      if (countText) countText.textContent = `${ids.length} Saved Creation${ids.length === 1 ? '' : 's'}`;
+
+      const products = ids.map(id => window.ProductStore.getById(id)).filter(Boolean);
+      container.innerHTML = products.map(p => window.createProductCard(p)).join('');
+    }
+
+    function addAllWishlistToCart() {
+      const ids = window.Wishlist ? window.Wishlist.getItems() : [];
+      if (ids.length === 0) return;
+
+      ids.forEach(id => {
+        window.Cart.addItem(id, 1);
+      });
+      showToast('All wishlisted items moved to your cart!', 'success');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderWishlist();
+      window.addEventListener('bloom:wishlist-updated', renderWishlist);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCF5F5"/>
+      <stop offset="50%" stop-color="#FDF0F2"/>
+      <stop offset="100%" stop-color="#F5ECF9"/>
+    </linearGradient>
+    <linearGradient id="petalGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F7C6CC"/>
+      <stop offset="100%" stop-color="#E8828D"/>
+    </linearGradient>
+    <linearGradient id="petalGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D96B75"/>
+      <stop offset="100%" stop-color="#BA4E58"/>
+    </linearGradient>
+    <linearGradient id="centerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FEEBC8"/>
+      <stop offset="100%" stop-color="#F6AD55"/>
+    </linearGradient>
+    <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9AE6B4"/>
+      <stop offset="100%" stop-color="#48BB78"/>
+    </linearGradient>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#D96B75" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="400" height="400" fill="url(#bgGrad)" rx="20"/>
+
+  <g transform="translate(200, 180)" filter="url(#softShadow)">
+    <!-- Leaves -->
+    <path d="M-20,40 Q-60,70 -90,40 Q-70,10 -20,30 Z" fill="url(#leafGrad)" opacity="0.85"/>
+    <path d="M20,40 Q60,70 90,40 Q70,10 20,30 Z" fill="url(#leafGrad)" opacity="0.85"/>
+
+    <!-- Outer Petals -->
+    <circle cx="0" cy="-45" r="32" fill="url(#petalGrad1)" opacity="0.95"/>
+    <circle cx="43" cy="-14" r="32" fill="url(#petalGrad1)" opacity="0.95"/>
+    <circle cx="27" cy="37" r="32" fill="url(#petalGrad1)" opacity="0.95"/>
+    <circle cx="-27" cy="37" r="32" fill="url(#petalGrad1)" opacity="0.95"/>
+    <circle cx="-43" cy="-14" r="32" fill="url(#petalGrad1)" opacity="0.95"/>
+
+    <!-- Inner Petals -->
+    <circle cx="0" cy="-28" r="24" fill="url(#petalGrad2)"/>
+    <circle cx="27" cy="-9" r="24" fill="url(#petalGrad2)"/>
+    <circle cx="17" cy="23" r="24" fill="url(#petalGrad2)"/>
+    <circle cx="-17" cy="23" r="24" fill="url(#petalGrad2)"/>
+    <circle cx="-27" cy="-9" r="24" fill="url(#petalGrad2)"/>
+
+    <!-- Flower Center -->
+    <circle cx="0" cy="0" r="18" fill="url(#centerGrad)"/>
+    <circle cx="0" cy="0" r="14" fill="#FFFAF0" opacity="0.5"/>
+  </g>
+
+  <!-- Typography -->
+  <text x="200" y="300" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="20" font-weight="600" fill="#2C2222" letter-spacing="0.5">
+    Bloom &amp; Bliss
+  </text>
+  <text x="200" y="324" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="500" fill="#786B6B" letter-spacing="1.5">
+    ARTISANAL FLORALS &amp; GIFTS
+  </text>
+</svg>

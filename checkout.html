@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Secure Checkout | Bloom & Bliss</title>
+  <meta name="description" content="Complete your order with Bloom & Bliss. Same-day express flower and gift delivery across India." />
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <style>
+    .checkout-header {
+      background: linear-gradient(135deg, #FDF0F2 0%, #F5ECF9 100%);
+      padding: 45px 0 30px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .checkout-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+    .checkout-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-card);
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+    }
+    .checkout-step-title {
+      font-size: 1.25rem;
+      font-family: var(--font-serif);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .step-number {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--white);
+      font-size: 0.85rem;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+    .payment-option-card {
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      background: var(--cream-bg);
+    }
+    .payment-option-card:hover, .payment-option-card.active {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+    .payment-option-card input {
+      accent-color: var(--primary);
+      width: 18px;
+      height: 18px;
+    }
+    .payment-details-box {
+      margin-top: 14px;
+      padding: 16px;
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      border: 1px dashed var(--border-subtle);
+      display: none;
+    }
+    .payment-details-box.active {
+      display: block;
+    }
+    .order-summary-sidebar {
+      background: var(--white);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 100px;
+    }
+    .sidebar-item-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .sidebar-item-img {
+      width: 50px;
+      height: 50px;
+      border-radius: var(--radius-xs);
+      object-fit: cover;
+    }
+    /* Order Confirmation Success Modal */
+    .success-modal-dialog {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      max-width: 600px;
+      width: 100%;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+    }
+    .success-icon-wrap {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: #E8F5EB;
+      color: var(--accent-sage);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .order-receipt-box {
+      background: var(--cream-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      margin: 24px 0;
+      text-align: left;
+    }
+    .receipt-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.92rem;
+    }
+    @media (max-width: 992px) {
+      .checkout-grid {
+        grid-template-columns: 1fr;
+      }
+      .order-summary-sidebar {
+        position: static;
+        order: -1;
+      }
+    }
+    @media (max-width: 600px) {
+      .form-row, .form-row-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    🔒 Safe 256-Bit SSL Encrypted Checkout • Same-Day Floral Dispatch
+  </div>
+
+  <!-- Sticky Navbar -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2a4 4 0 0 0-4 4c0 3 4 7 4 7s4-4 4-7a4 4 0 0 0-4-4z"/>
+            <path d="M12 13s-4 4-4 7a4 4 0 0 0 8 0c0-3-4-7-4-7z"/>
+          </svg>
+        </div>
+        <div>
+          <span class="brand-name">Bloom & Bliss</span>
+          <span class="brand-tagline-sub">Flowers & Gifts</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="flowers.html" class="nav-link">Flowers</a>
+        <a href="gifts.html" class="nav-link">Gifts</a>
+        <a href="combos.html" class="nav-link">Combos</a>
+        <a href="occasions.html" class="nav-link">Occasions</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="cart.html" class="btn btn-sm btn-outline">
+          &larr; Return to Cart
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Checkout Header -->
+  <section class="checkout-header">
+    <div class="container">
+      <span class="section-eyebrow">Express Delivery</span>
+      <h1 class="section-title">Delivery & Payment Details</h1>
+      <p class="section-subtitle">Please provide recipient address and preferred delivery date.</p>
+    </div>
+  </section>
+
+  <!-- Checkout Content -->
+  <section class="section-spacer">
+    <div class="container">
+      <form id="checkout-form" onsubmit="handlePlaceOrder(event)">
+        <div class="checkout-grid">
+          <!-- Left: Checkout Forms -->
+          <div>
+            <!-- Step 1: Contact Details -->
+            <div class="checkout-card">
+              <h3 class="checkout-step-title">
+                <span class="step-number">1</span>
+                Contact & Sender Details
+              </h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Full Name *</label>
+                  <input type="text" id="cust-name" class="form-input" placeholder="e.g. Rahul Sharma" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Mobile Number (for delivery updates) *</label>
+                  <input type="tel" id="cust-phone" class="form-input" placeholder="9876543210" pattern="[0-9]{10}" title="10-digit mobile number" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email Address (for invoice & tracking) *</label>
+                <input type="email" id="cust-email" class="form-input" placeholder="rahul@example.com" required />
+              </div>
+            </div>
+
+            <!-- Step 2: Delivery Address -->
+            <div class="checkout-card">
+              <h3 class="checkout-step-title">
+                <span class="step-number">2</span>
+                Recipient Delivery Address
+              </h3>
+              <div class="form-group">
+                <label class="form-label">Street Address & Landmark *</label>
+                <input type="text" id="cust-address" class="form-input" placeholder="Flat No., Wing, Building Name, Street Landmark" required />
+              </div>
+              <div class="form-row-3">
+                <div class="form-group">
+                  <label class="form-label">City *</label>
+                  <input type="text" id="cust-city" class="form-input" placeholder="Bangalore" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">State *</label>
+                  <input type="text" id="cust-state" class="form-input" placeholder="Karnataka" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Pincode *</label>
+                  <input type="text" id="cust-pincode" class="form-input" placeholder="560038" pattern="[0-9]{6}" title="6-digit Pincode" required />
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3: Delivery Date & Gift Message -->
+            <div class="checkout-card">
+              <h3 class="checkout-step-title">
+                <span class="step-number">3</span>
+                Delivery Date & Complimentary Message
+              </h3>
+              <div class="form-group">
+                <label class="form-label">Select Delivery Date *</label>
+                <input type="date" id="cust-date" class="form-input" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Gift Message (Handwritten on complimentary floral card)</label>
+                <textarea id="cust-message" class="form-textarea" rows="3" placeholder="Write your heartfelt greeting, anniversary wish, or birthday blessing here..."></textarea>
+              </div>
+            </div>
+
+            <!-- Step 4: Payment Options (UPI, COD, Card) -->
+            <div class="checkout-card">
+              <h3 class="checkout-step-title">
+                <span class="step-number">4</span>
+                Select Payment Method
+              </h3>
+
+              <!-- Option 1: UPI -->
+              <label class="payment-option-card active" onclick="selectPaymentMethod('upi')">
+                <input type="radio" name="payment-method" id="pay-upi" value="UPI" checked />
+                <div style="flex-grow: 1;">
+                  <strong style="color: var(--text-dark); display: block;">UPI (Google Pay / PhonePe / Paytm / BHIM)</strong>
+                  <span style="font-size: 0.82rem; color: var(--text-muted);">Instant zero-fee transfer via any UPI App</span>
+                </div>
+                <span class="payment-badge" style="background: var(--accent-sage-light); color: var(--accent-sage); font-weight: 700;">Fastest</span>
+              </label>
+
+              <div id="upi-details" class="payment-details-box active">
+                <label class="form-label">Enter UPI ID / VPA</label>
+                <div style="display: flex; gap: 10px;">
+                  <input type="text" id="upi-id-input" class="form-input" placeholder="e.g. yourname@okhdfcbank" />
+                  <button type="button" class="btn btn-sm btn-outline" onclick="verifyUpiMock()">Verify</button>
+                </div>
+                <span id="upi-status" style="font-size: 0.8rem; color: var(--accent-sage); margin-top: 6px; display: block;"></span>
+              </div>
+
+              <!-- Option 2: Card -->
+              <label class="payment-option-card" onclick="selectPaymentMethod('card')">
+                <input type="radio" name="payment-method" id="pay-card" value="Card" />
+                <div style="flex-grow: 1;">
+                  <strong style="color: var(--text-dark); display: block;">Credit / Debit Card</strong>
+                  <span style="font-size: 0.82rem; color: var(--text-muted);">Visa, MasterCard, RuPay, American Express</span>
+                </div>
+              </label>
+
+              <div id="card-details" class="payment-details-box">
+                <div class="form-group">
+                  <label class="form-label">Card Number</label>
+                  <input type="text" class="form-input" placeholder="XXXX XXXX XXXX 4123" maxlength="19" />
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Expiry (MM/YY)</label>
+                    <input type="text" class="form-input" placeholder="08/28" maxlength="5" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">CVV</label>
+                    <input type="password" class="form-input" placeholder="123" maxlength="4" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Option 3: COD -->
+              <label class="payment-option-card" onclick="selectPaymentMethod('cod')">
+                <input type="radio" name="payment-method" id="pay-cod" value="COD" />
+                <div style="flex-grow: 1;">
+                  <strong style="color: var(--text-dark); display: block;">Cash on Delivery (COD)</strong>
+                  <span style="font-size: 0.82rem; color: var(--text-muted);">Pay upon delivery of fresh flowers at doorstep</span>
+                </div>
+              </label>
+
+              <div id="cod-details" class="payment-details-box">
+                <p style="font-size: 0.86rem; color: var(--text-muted);">
+                  Please have the exact amount in cash or scan the delivery executive's QR code upon arrival.
+                </p>
+              </div>
+
+              <div style="margin-top: 28px;">
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px; font-size: 1.1rem;">
+                  Place Order & Confirm &rarr;
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Order Summary Sidebar -->
+          <div class="order-summary-sidebar">
+            <h3 style="font-size: 1.35rem; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid var(--border-subtle);">
+              Order Summary (<span id="checkout-count">0</span> items)
+            </h3>
+
+            <!-- List of Items -->
+            <div id="checkout-items-list" style="max-height: 280px; overflow-y: auto; margin-bottom: 18px;">
+              <!-- Dynamic Rows -->
+            </div>
+
+            <!-- Price Breakdown -->
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem; color: var(--text-muted);">
+              <span>Bag Subtotal</span>
+              <span id="co-subtotal" style="color: var(--text-dark); font-weight: 600;">₹0</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem; color: var(--text-muted);">
+              <span>Delivery Fee</span>
+              <span id="co-delivery">₹0</span>
+            </div>
+
+            <div id="co-discount-row" style="display: none; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem; color: var(--accent-sage);">
+              <span>Discount</span>
+              <span id="co-discount">-₹0</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 1.25rem; font-weight: 700; color: var(--text-dark); padding-top: 14px; border-top: 1.5px dashed var(--border-subtle); margin-top: 14px;">
+              <span>Total Payable</span>
+              <span id="co-total" style="color: var(--primary); font-size: 1.5rem;">₹0</span>
+            </div>
+
+            <div style="margin-top: 20px; font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">
+              By placing this order you agree to Bloom & Bliss's Terms of Service and Freshness Guarantee.
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Order Confirmation Success Modal -->
+  <div id="order-success-modal" class="modal-backdrop">
+    <div class="success-modal-dialog animate-scale-up">
+      <div class="success-icon-wrap">
+        <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+
+      <h2 style="font-size: 2rem; margin-bottom: 8px;">Order Confirmed!</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">
+        Thank you! Your floral surprise is in good hands. We have received your order and our florists are preparing it.
+      </p>
+
+      <div class="order-receipt-box">
+        <div class="receipt-row">
+          <span style="color: var(--text-muted);">Order ID:</span>
+          <strong id="receipt-id" style="color: var(--primary);">BNB-2026-0000</strong>
+        </div>
+        <div class="receipt-row">
+          <span style="color: var(--text-muted);">Recipient:</span>
+          <span id="receipt-name">Recipient Name</span>
+        </div>
+        <div class="receipt-row">
+          <span style="color: var(--text-muted);">Delivery Date:</span>
+          <span id="receipt-date">DD/MM/YYYY</span>
+        </div>
+        <div class="receipt-row">
+          <span style="color: var(--text-muted);">Payment Method:</span>
+          <span id="receipt-method">UPI</span>
+        </div>
+        <div class="receipt-row" style="padding-top: 8px; border-top: 1px dashed var(--border-subtle); margin-top: 8px; font-weight: 700; font-size: 1.05rem;">
+          <span>Amount Paid:</span>
+          <span id="receipt-amount" style="color: var(--primary);">₹0</span>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+        <button class="btn btn-outline" onclick="window.print()">
+          Print Receipt
+        </button>
+        <a href="index.html" class="btn btn-primary">
+          Continue Shopping &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    function renderCheckoutSummary() {
+      const items = window.Cart.getItems();
+      const count = window.Cart.getCount();
+      const subtotal = window.Cart.getSubtotal();
+      const delivery = window.Cart.getDeliveryCharge();
+      const discount = window.Cart.getDiscount();
+      const total = window.Cart.getTotal();
+
+      if (items.length === 0) {
+        // Redirect to cart if empty
+        window.location.href = 'cart.html';
+        return;
+      }
+
+      document.getElementById('checkout-count').textContent = count;
+      document.getElementById('co-subtotal').textContent = formatINR(subtotal);
+      
+      const delEl = document.getElementById('co-delivery');
+      if (delivery === 0) {
+        delEl.innerHTML = '<span style="color: var(--accent-sage); font-weight: 700;">FREE</span>';
+      } else {
+        delEl.textContent = formatINR(delivery);
+      }
+
+      const discRow = document.getElementById('co-discount-row');
+      const discEl = document.getElementById('co-discount');
+      if (discount > 0) {
+        discRow.style.display = 'flex';
+        discEl.textContent = `-${formatINR(discount)}`;
+      } else {
+        discRow.style.display = 'none';
+      }
+
+      document.getElementById('co-total').textContent = formatINR(total);
+
+      // Render Item List
+      const listContainer = document.getElementById('checkout-items-list');
+      listContainer.innerHTML = items.map(item => `
+        <div class="sidebar-item-row">
+          <img src="${item.image}" alt="${item.name}" class="sidebar-item-img" onerror="this.onerror=null; this.src='${FALLBACK_IMAGE}';" />
+          <div style="flex-grow: 1;">
+            <strong style="font-size: 0.88rem; color: var(--text-dark); display: block;">${item.name}</strong>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Qty: ${item.quantity} &times; ${formatINR(item.price)}</span>
+          </div>
+          <span style="font-weight: 600; font-size: 0.9rem; color: var(--text-dark);">${formatINR(item.price * item.quantity)}</span>
+        </div>
+      `).join('');
+    }
+
+    function selectPaymentMethod(type) {
+      document.querySelectorAll('.payment-option-card').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.payment-details-box').forEach(b => b.classList.remove('active'));
+
+      if (type === 'upi') {
+        document.getElementById('pay-upi').checked = true;
+        document.getElementById('pay-upi').closest('.payment-option-card').classList.add('active');
+        document.getElementById('upi-details').classList.add('active');
+      } else if (type === 'card') {
+        document.getElementById('pay-card').checked = true;
+        document.getElementById('pay-card').closest('.payment-option-card').classList.add('active');
+        document.getElementById('card-details').classList.add('active');
+      } else if (type === 'cod') {
+        document.getElementById('pay-cod').checked = true;
+        document.getElementById('pay-cod').closest('.payment-option-card').classList.add('active');
+        document.getElementById('cod-details').classList.add('active');
+      }
+    }
+
+    function verifyUpiMock() {
+      const inp = document.getElementById('upi-id-input');
+      const status = document.getElementById('upi-status');
+      if (inp && inp.value.includes('@')) {
+        status.textContent = `✓ UPI ID Verified (${inp.value.trim()})`;
+        showToast('UPI ID verified successfully!', 'success');
+      } else {
+        status.textContent = 'Please enter a valid UPI ID (e.g. name@upi)';
+        status.style.color = '#D94656';
+      }
+    }
+
+    function handlePlaceOrder(event) {
+      event.preventDefault();
+      
+      const name = document.getElementById('cust-name').value.trim();
+      const phone = document.getElementById('cust-phone').value.trim();
+      const email = document.getElementById('cust-email').value.trim();
+      const date = document.getElementById('cust-date').value;
+      const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+      const totalAmount = window.Cart.getTotal();
+
+      if (!name || !phone || !email || !date) {
+        showToast('Please fill all mandatory fields.', 'error');
+        return;
+      }
+
+      // Generate realistic Order ID
+      const orderId = 'BNB-' + new Date().getFullYear() + '-' + Math.floor(10000 + Math.random() * 90000);
+
+      // Populate Success Modal
+      document.getElementById('receipt-id').textContent = orderId;
+      document.getElementById('receipt-name').textContent = name;
+      document.getElementById('receipt-date').textContent = new Date(date).toLocaleDateString('en-IN', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+      document.getElementById('receipt-method').textContent = paymentMethod;
+      document.getElementById('receipt-amount').textContent = formatINR(totalAmount);
+
+      // Clear Cart from storage
+      window.Cart.clearCart();
+
+      // Show Modal
+      const modal = document.getElementById('order-success-modal');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set min date to today for delivery date picker
+      const today = new Date().toISOString().split('T')[0];
+      const datePicker = document.getElementById('cust-date');
+      if (datePicker) {
+        datePicker.min = today;
+        datePicker.value = today;
+      }
+
+      renderCheckoutSummary();
+    });
+  </script>
+</body>
+</html>

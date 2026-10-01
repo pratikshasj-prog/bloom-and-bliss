@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gift Combos & Celebration Hampers | Bloom & Bliss</title>
+  <meta name="description" content="Discover luxurious gift combos pairing fresh bouquets with chocolates, cuddly teddy bears, cakes, and spa essentials at Bloom & Bliss." />
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <style>
+    .combos-hero {
+      background: linear-gradient(135deg, #FBECEE 0%, #F5ECF9 50%, #ECF6EE 100%);
+      padding: 60px 0 45px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .combos-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: var(--white);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 16px 24px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    🎁 Elevate Celebrations with Curated Combos • Save up to 25% on Hampers • Code <span class="badge-code">BLOOM10</span>
+  </div>
+
+  <!-- Sticky Navbar -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2a4 4 0 0 0-4 4c0 3 4 7 4 7s4-4 4-7a4 4 0 0 0-4-4z"/>
+            <path d="M12 13s-4 4-4 7a4 4 0 0 0 8 0c0-3-4-7-4-7z"/>
+          </svg>
+        </div>
+        <div>
+          <span class="brand-name">Bloom & Bliss</span>
+          <span class="brand-tagline-sub">Flowers & Gifts</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="flowers.html" class="nav-link">Flowers</a>
+        <a href="gifts.html" class="nav-link">Gifts</a>
+        <a href="combos.html" class="nav-link active">Combos</a>
+        <a href="occasions.html" class="nav-link">Occasions</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="nav-icon-btn" onclick="openSearchModal()" title="Search catalog">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <a href="wishlist.html" class="nav-icon-btn" title="View Wishlist">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span class="badge-counter wishlist-badge" style="display: none;">0</span>
+        </a>
+        <button class="nav-icon-btn" onclick="toggleCartDrawer()" title="View Shopping Cart">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="badge-counter cart-badge" style="display: none;">0</span>
+        </button>
+        <button class="mobile-toggle" id="mobile-toggle" onclick="toggleMobileMenu()">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-overlay" id="nav-overlay" onclick="closeMobileMenu()"></div>
+
+  <!-- Combos Header -->
+  <section class="combos-hero">
+    <div class="container">
+      <span class="section-eyebrow">Perfect Harmonies</span>
+      <h1 class="section-title">Gift Combos & Hampers</h1>
+      <p class="section-subtitle">Thoughtfully paired fresh blossoms with artisanal chocolates, cakes, teddy bears, and pamper essentials.</p>
+    </div>
+  </section>
+
+  <!-- Combos Listing Section -->
+  <section class="section-spacer">
+    <div class="container">
+      <div class="combos-toolbar">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <button class="btn btn-sm btn-primary" data-subcat="all">All Combos</button>
+          <button class="btn btn-sm btn-outline" data-subcat="gift-hampers">Celebration Hampers</button>
+          <button class="btn btn-sm btn-outline" data-subcat="plants">Plant & Tea Sets</button>
+          <button class="btn btn-sm btn-outline" data-subcat="orchids">Royal Orchid Boxes</button>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <span id="product-count" style="font-size: 0.9rem; color: var(--text-muted); font-weight: 600;">8 Combos</span>
+          <div class="sort-box">
+            <label for="sort-by" style="color: var(--text-muted); font-size: 0.88rem;">Sort:</label>
+            <select id="sort-by" class="sort-select">
+              <option value="popularity">Most Popular</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="rating">Top Rated</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-grid" id="product-grid">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo" style="margin-bottom: 12px; display: inline-flex;">
+            <div class="brand-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2a4 4 0 0 0-4 4c0 3 4 7 4 7s4-4 4-7a4 4 0 0 0-4-4z"/>
+              </svg>
+            </div>
+            <div>
+              <span class="brand-name">Bloom & Bliss</span>
+              <span class="brand-tagline-sub">Flowers, Gifts & Moments Made Special</span>
+            </div>
+          </a>
+          <p class="footer-desc">Curating heartfelt celebrations with hand-tied floral bouquets and artisanal gift hampers across India.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Combo Collections</h4>
+          <ul class="footer-links">
+            <li><a href="combos.html">Roses + Chocolates</a></li>
+            <li><a href="combos.html">Flowers + Teddy</a></li>
+            <li><a href="combos.html">Birthday Hampers</a></li>
+            <li><a href="combos.html">Anniversary Boxes</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Help</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About Bloom & Bliss</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="cart.html">View Cart</a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Concierge Desk</h4>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>+91 98765 43210</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>hampers@bloomandbliss.in</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Bloom & Bliss. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="btn-scroll-top" id="btn-scroll-top" onclick="scrollToTop()">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/filters.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      new ProductCatalogPage({
+        baseCategory: 'combos',
+        containerId: 'product-grid',
+        countId: 'product-count'
+      });
+    });
+  </script>
+</body>
+</html>
